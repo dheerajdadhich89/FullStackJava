@@ -1,0 +1,85 @@
+create table Address
+(
+Address_id number primary key ,
+flat_no varchar2(30) NOT NULL,
+street_name varchar2(50) NOT NULL,
+city varchar2(30) NOT NULL,
+state varchar2(30) NOT NULL,
+country varchar2(10) NOT NULL,
+pin number NOT NULL
+);
+
+insert into Address values(101,'D-104 ', 'Shaheed Bhagat Singh marg', 'Mumbai','Maharasthara', 'India',400614);
+insert into Address values(102,'A-204', 'Chandra Shekhar Azad marg', 'Mumbai','Maharasthara', 'India',412625);
+insert into Address values(103,'C-915', 'Akbar Road', 'Mumbai','Maharasthara', 'India',400524);
+insert into Address values(104,'B-212', 'Barakhamba Road', 'Delhi','New Delhi', 'India',110001);
+insert into Address values(105,'D-514', 'ManSingh Road', 'Delhi','New Delhi', 'India',110005);
+insert into Address values(106,'B-705', 'Shaheed Bhagat Singh marg', 'Mumbai','Maharasthara', 'India',400614);
+
+
+
+create table Customer_dashboard
+(
+cust_id number primary key,
+name varchar2(50) NOT NULL,
+email varchar2(50) NOT NULL,
+mobile number NOT NULL,
+date_of_birth date NOT NULL,
+pan_number varchar2(10) NOT NULL,
+Address_id number NOT NULL,
+CONSTRAINT address_fk FOREIGN KEY(Address_id )
+REFERENCES Address(Address_id)
+);
+
+
+insert into Customer_dashboard values(1011,'Rahul Singh', 'rahulSingh@gmail.com', 9865256326,TO_DATE('22/01/1988','DD/MM/YYYY'),'BKDPD5692R',101);
+insert into Customer_dashboard values(1012,'Rakesh Kumar', 'rakeshkumar@gmail.com', 9865236145,TO_DATE( '26/07/1989','DD/MM/YYYY'),'DKDPY3652G',102);
+insert into Customer_dashboard values(1013,'Nagendra Singh', 'nagendrasingh@gmail.com',6325965845,TO_DATE('09-04-1985','DD/MM/YYYY'),'MKOPS6225Q',103);
+insert into Customer_dashboard values(1014,'Vikas Patil', 'vikaspatil@gmail.com',9869758659,TO_DATE('21-06-1992','DD/MM/YYYY'),'DDOPK8556A',104);
+insert into Customer_dashboard values(1015,'Dharmendra Wadhwa', 'dharmendrawadhwa@gmail.com', 8356874569,TO_DATE('11-12-1978','DD/MM/YYYY'),'ANJPG5689A',105)
+insert into Customer_dashboard values(1016,'Sachin Sharma', 'sachinsharma@gmail.com',7256325951,TO_DATE('25-12-1998','DD/MM/YYYY'),'CFOPK8520E',106);
+
+
+
+
+
+create table Account
+(
+account_number number primary key,
+balance number,
+limit number,
+open_date date,
+rate_of_interest number,
+cust_id number NOT NULL,
+CONSTRAINT customer_fk FOREIGN KEY(cust_id )
+REFERENCES Customer_dashboard(cust_id)
+);
+
+
+
+
+
+
+create table Account_Types
+(
+s_no number PRIMARY KEY,
+account_type varchar2(15),
+account_id number
+);
+
+
+
+create table Transaction
+(
+transaction_id number primary key,
+transaction_type varchar2(15),
+transaction_status varchar2(15),
+transaction_amount number,
+transaction_time timestamp,
+transaction_date date,
+source_account number,
+destination_account number,
+account_number number  NOT NULL,
+CONSTRAINT account_fk FOREIGN KEY(account_number )
+REFERENCES Account(account_number)
+);
