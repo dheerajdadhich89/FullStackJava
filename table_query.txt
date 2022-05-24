@@ -49,23 +49,19 @@ account_number number primary key,
 balance number,
 limit number,
 open_date date,
-rate_of_interest number,
+rate_of_interest NUMBER(3,2),
+account_type varchar2(15),
 cust_id number NOT NULL,
 CONSTRAINT customer_fk FOREIGN KEY(cust_id )
 REFERENCES Customer_dashboard(cust_id)
 );
 
-
-
-
-
-
-create table Account_Types
-(
-s_no number PRIMARY KEY,
-account_type varchar2(15),
-account_id number
-);
+insert into Account values(2011,25000,25000,TO_DATE('25-04-2022','DD/MM/YYYY'),3.5,'Saving',1011);
+insert into Account values(2012,85350,85350,TO_DATE('15-03-2021','DD/MM/YYYY'),3.5,'Current',1012);
+insert into Account values(2013,25956,25956,TO_DATE('11-06-2005','DD/MM/YYYY'),3.5,'Saving',1013);
+insert into Account values(2014,45358,45358,TO_DATE('18-05-2022','DD/MM/YYYY'),3.5,'Current',1014);
+insert into Account values(2015,175000,75000,TO_DATE('26-09-2022','DD/MM/YYYY'),3.5,'Fixed Deposit',1015);
+insert into Account values(2016,125000,125000,TO_DATE('19-02-2022','DD/MM/YYYY'),3.5,'Saving',1016);
 
 
 
@@ -83,3 +79,7 @@ account_number number  NOT NULL,
 CONSTRAINT account_fk FOREIGN KEY(account_number )
 REFERENCES Account(account_number)
 );
+
+
+
+insert into Transaction values(4011)
